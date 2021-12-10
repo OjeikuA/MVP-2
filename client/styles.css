@@ -1,0 +1,95 @@
+/* body {
+  background: radial-gradient(#302b63, #24243e);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+} */
+
+#comments {
+  size: 100;
+  height: 100
+}
+
+form {
+  margin: 12% auto;
+  background-color: #f7f7f9;
+  border: 3px solid black;
+  width: 380px;
+  height: 390px;
+}
+
+.container {
+  padding: 16px;
+  border: 3px solid blue;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.map-h2 {
+  text-transform: uppercase;
+  font-size: 1rem;
+  padding: 20px;
+  padding-left: 10px;
+  text-align: center;
+}
+
+.google-map {
+  width: 100%;
+  height: 100px;
+}
+
+.pin {
+  display: flex;
+  align-items: center;
+  width: 20px;
+  color: var(--main-blue);
+}
+
+.pin-icon {
+  font-size: 4rem;
+}
+
+.pin-text {
+  font-size: 1.3em;
+}
+
+@media screen and (min-width: 799px) {
+  .google-map {
+    height: 80vh;
+  }
+
+  .map-h2 {
+    font-size: 1.3rem;
+    font-weight: 400;
+  }
+
+  .pin {
+    width: 10vw;
+  }
+
+  .pin-icon {
+    font-size: 10vw;
+  }
+}
