@@ -4,7 +4,7 @@ const db = require('./database.js');
 const Locale = db.conn.model('locales', db.localeSchema);
 
 const addLocale = (req, res, address, callback) => {
-  axios.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key=AIzaSyA2alD8pmzJrvKCYYu6NaI-hF_o5dPX1O0')
+  axios.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key=' + process.env.API_KEY)
     .then(data => {
       console.log(data.data.results[0].geometry.location)
       var newLocale = new Locale({

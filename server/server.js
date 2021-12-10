@@ -40,8 +40,6 @@ app.get('/findSpot', (req, res) => {
     console.log(data);
     res.send(data);
   })
-  // axios.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key=AIzaSyA2alD8pmzJrvKCYYu6NaI-hF_o5dPX1O0')
-  //   .then(data => console.log(data.data.results[0].geometry.location))
 })
 
 
@@ -50,14 +48,3 @@ app.listen(process.env.PORT, ()=>{
   console.log(`Listening on port: ${process.env.PORT}`);
 })
 
-/*
-// avoid talking about "migrating" databases
-// focus more on non-database work
-
-  migrated monolith to microservice
-
-  when you think about API design - API is your routes; how you view the REST standard
-  good answer to a lot of questions - test the system, find weaknesses/bottlenecks, and then fix them
-  don't say that you use Redis to make the database smaller - mind your language
-
-*/
