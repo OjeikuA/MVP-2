@@ -19,7 +19,7 @@ app.use(express.static(path.resolve('client')));
 
 app.get('/test', (req, res) => {
   console.log('page load');
-  res.send('Test Successful!');
+  res.send('The Comeback');
 });
 
 app.post('/newSpot', (req, res) => {

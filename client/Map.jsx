@@ -6,9 +6,9 @@ import App from './App.jsx';
 import LocationPin from './LocationPin.jsx';
 import { API_KEY } from '../config.js';
 
-const Map = ({ location, zoomLevel }) => (
+const Map = ({ location, zoomLevel, header = "Find a Locale of Interest" }) => (
   <div className="map">
-    <h2 className="map-h2">Here's Your Locale of Interest</h2>
+    <h2 className="map-h2">{header}</h2>
 
     <div className="google-map">
       <GoogleMapReact

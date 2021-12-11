@@ -26,7 +26,7 @@ const addLocale = (req, res, address, callback) => {
 const getLocale = (name, callback) => {
   console.log('Hi! My name is: ', name);
   const locale = name.split('+').join(' ');
-  Locale.find({name: locale})
+  Locale.find({city: locale})
     .then(data => callback(data))
 }
 

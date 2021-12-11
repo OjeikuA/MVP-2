@@ -11,12 +11,17 @@
   height: 100
 }
 
-form {
+.form {
   margin: 12% auto;
   background-color: #f7f7f9;
   border: 3px solid black;
   width: 380px;
   height: 390px;
+}
+
+#citySearch {
+  background-color: #f7f7f9;
+  border: 3px solid black;
 }
 
 .container {
@@ -33,7 +38,7 @@ input, select {
   box-sizing: border-box;
 }
 
-button {
+/* button {
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
@@ -41,7 +46,7 @@ button {
   border: none;
   cursor: pointer;
   width: 100%;
-}
+} */
 
 button:hover {
   opacity: 0.8;
@@ -92,4 +97,14 @@ button:hover {
   .pin-icon {
     font-size: 10vw;
   }
+}
+
+.map {
+  width: 80%;
+  display: inline-block;
+}
+
+.content {
+  width: 20%;
+  display: inline-block;
 }
