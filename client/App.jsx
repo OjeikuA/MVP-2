@@ -7,16 +7,19 @@ const App = (props) => {
   const [init, setInit] = useState('Hello World');
   const [map, setMap] = useState(null);
   const [location, setLocation] = useState({
-    address: '301 Sullivan Pl Brooklyn, NY 11225',
-    lat: 40.6650885,
-    lng: -73.9513202
+    address: 'Brooklyn, NY',
+    lat: 40.6781784,
+    lng: -73.9441579
   });
   const [places, setPlaces] = useState([]);
   const [content, setContent] = useState('');
   const [contentName, setContentName] = useState('');
-  const [mapHeader, setMapHeader] = useState('Find a Locale of Interest');
+  const [mapHeader, setMapHeader] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [buttonCont, setButtonCont] = useState('Add a Point of Interest')
+  const [candidates, setCandidates] = useState([]);
+  const [photos, setPhotos] = useState(null);
+  const [zoom, setZoom] = useState(13);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -37,9 +40,19 @@ const App = (props) => {
       .then(data => {
         setPlaces(data.data)
         console.log(data.data);
+        setMapHeader(e.target.name.value)
+      });
+    axios.get('/showCity?name=' + options)
+      .then(data => {
+        setLocation({
+          address: e.target.name.value,
+          lat: data.data.lat,
+          lng: data.data.lng
+        });
+        setZoom(13);
+        console.log(data.data);
       });
       console.log(location);
-    return;
   };
 
   const handleSubmit = (e) => {
@@ -54,21 +67,36 @@ const App = (props) => {
       menu: e.target.menu.value,
       comments: e.target.comments.value
     })
-      .then(data => console.log(data))
+      .then(data => findSpots(e.target.city.value))
     setShowModal(false);
-  };
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    console.log(e.target.name.value)
-    axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/output?name=' + e.target.name.value)
-      .then(data => console.log(data))
+    setButtonCont('Add another Point of Interest');
   };
 
   const handleModal = e => {
     e.preventDefault();
     setShowModal(!showModal)
     setButtonCont('Hide Form')
+  }
+
+  const getDetails = e => {
+    e.preventDefault();
+    console.log(e.target.place.value)
+    axios.get('/findplacefromtext?name=' + e.target.place.value)
+      .then(data => {
+        setCandidates(data.data)
+      });
+  };
+
+  const autofill = e => {
+    e.preventDefault();
+    console.log(e.target.text)
+  }
+
+  const getPhotos = name => {
+    console.log('getting photos for', name);
+    axios.get('/photos?name=' + name)
+      .then(data => setPhotos(data.data))
+      .catch(err => console.error(err))
   }
 
   useEffect(()=>{
@@ -91,23 +119,29 @@ const App = (props) => {
         <h1 onClick={handleModal}>{init}</h1>
         {
           showModal ?
-          <form className="form" onSubmit={handleSubmit}>
-            <input type="text" name="name" placeholder="Name of Location" />
-            <input type="text" name="street" placeholder="Street Address" />
-            <input type="text" name="city" placeholder="City" />
-            <input type="text" name="state" placeholder= "State" />
-            <input type="text" name="zip" placeholder="Zip" />
-            <input type="text" name="menu" placeholder="Relevant Menu Items" />
-            <input type="text" name="comments" id="Comments" size="100" placeholder="Comments" />
-            <input type="submit" value="Submit" />
-          </form>
+          <>
+            <form className="content" onSubmit={getDetails}>
+              <input type="text" name="place" placeholder="Please enter the name of the locale"/>
+              <input type="submit" value="Submit" />
+            </form>
+            {candidates ? candidates.map(candidate => <a onClick={autofill} href="#">{candidate.formatted_address}</a>) : null}
+            <form className="form" onSubmit={handleSubmit}>
+              <input type="text" name="name" placeholder="Name of Location" />
+              <input type="text" name="street" placeholder="Street Address" />
+              <input type="text" name="city" placeholder="City" />
+              <input type="text" name="state" placeholder= "State" />
+              <input type="text" name="zip" placeholder="Zip" />
+              <input type="text" name="menu" placeholder="Relevant Menu Items" />
+              <input type="text" name="comments" id="Comments" size="100" placeholder="Comments" />
+              <input type="submit" value="Submit" />
+            </form>
+          </>
           : null
         }
         <button onClick={handleModal}>{buttonCont}</button>
         <div>
             <div>
               <div className="map">
-                <Map location={location} zoomLevel={17} header={mapHeader}/>
               </div>
               <div className="content">
               <form onSubmit={findSpots} id="citySearch">
@@ -115,47 +149,44 @@ const App = (props) => {
                 <input type="submit" value="Submit" />
               </form>
               {
-                places ? <table>
-                  <tbody>
-
-                {
-                  places.map(place => {
-                    return (
-                      <>
-                        <tr border="1px solid black">
-                          <th onClick={()=>{
+                places ? places.map(place => {
+                  return (
+                    <>
+                        <ul>
+                          <li border="1px solid black" onClick={()=>{
                             setLocation({
                               address: place.street,
                               lat: place.lat,
                               lng: place.lng
                             });
-                            setContent(place.comments)
-                            setContentName(place.name)
-                            setMapHeader(place.name + ', ' + place.street)
-                          }}>{place.name}</th>
-                        </tr>
-                        <tr>
-                          <td>{place.street}</td>
-                        </tr>
+                            setContent(place.comments);
+                            setContentName(place.name);
+                            setMapHeader(place.name + ', ' + place.street);
+                            setZoom(17);
+                            getPhotos(place.name);
+                          }}>{place.name}, {place.street}</li>
+                        </ul>
                       </>
                     )
-                  })
+                  }) : null
                 }
-                </tbody>
-                </table> : null
-              }
+                <Map location={location} zoomLevel={zoom} header={mapHeader}/>
               {
                 content ?
-                <table>
-                  <tbody>
-                    <tr>
-                      <th>{contentName}</th>
-                    </tr>
-                    <tr>
-                      <td>{content}</td>
-                    </tr>
-                  </tbody>
-                </table> : null
+                <>
+                  <div id="contentName">
+                    {contentName}
+                  </div>
+                  <div id="contents">
+                    {content}
+                  </div>
+                  <div>
+                    {
+                      photos ? photos.map(photo => <img src={photo.image.thumbnailLink} />) : null
+                    }
+                  </div>
+                </>
+                : null
               }
               </div>
             </div>

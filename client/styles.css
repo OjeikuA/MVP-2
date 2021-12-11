@@ -104,7 +104,11 @@ button:hover {
   display: inline-block;
 }
 
-.content {
-  width: 20%;
-  display: inline-block;
+#contents {
+  border: 3px solid black;
+}
+
+#contentName {
+  /* border: 3px solid black; */
+  /* background-color: blue; */
 }
