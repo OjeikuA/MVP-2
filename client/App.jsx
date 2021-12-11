@@ -120,7 +120,7 @@ const App = (props) => {
         {
           showModal ?
           <>
-            <form className="content" onSubmit={getDetails}>
+            <form className="content" id="newEdition" onSubmit={getDetails}>
               <input type="text" name="place" placeholder="Please enter the name of the locale"/>
               <input type="submit" value="Submit" />
             </form>

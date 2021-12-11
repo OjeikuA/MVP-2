@@ -25,6 +25,12 @@ body {
   border: 3px solid black;
 }
 
+#newEdition {
+  width: 50%;
+  background-color: #f7f7f9;
+  border: 3px solid black;
+}
+
 .container {
   padding: 16px;
   border: 3px solid blue;
