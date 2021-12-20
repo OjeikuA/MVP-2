@@ -76,6 +76,9 @@ const App = (props) => {
     e.preventDefault();
     setShowModal(!showModal)
     setButtonCont('Hide Form')
+    if (buttonCont === 'Hide Form') {
+      setButtonCont('Add another Point of Interest');
+    }
   }
 
   const getDetails = e => {
@@ -124,7 +127,7 @@ const App = (props) => {
               <input type="text" name="place" placeholder="Please enter the name of the locale"/>
               <input type="submit" value="Submit" />
             </form>
-            {candidates ? candidates.map(candidate => <a onClick={autofill} href="#">{candidate.formatted_address}</a>) : null}
+            {candidates ? candidates.map(candidate => <div><a onClick={autofill} href="#">{candidate.formatted_address}</a></div>) : null}
             <form className="form" onSubmit={handleSubmit}>
               <input type="text" name="name" placeholder="Name of Location" />
               <input type="text" name="street" placeholder="Street Address" />

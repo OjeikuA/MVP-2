@@ -25,7 +25,7 @@ app.use(express.static(path.resolve('client')));
 
 app.get('/test', (req, res) => {
   console.log('page load');
-  res.send('The Comeback');
+  res.send('Places to Visit (again)');
 });
 
 app.post('/newSpot', (req, res) => {

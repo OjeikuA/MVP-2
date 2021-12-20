@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --hot",
     "start-serv": "nodemon ./server/server.js",
     "build": "webpack --mode development"
   },
+  "engines": {
+    "node": ">=12"
+},
   "author": "",
   "license": "ISC",
   "dependencies": {
