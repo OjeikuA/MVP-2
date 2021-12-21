@@ -24,7 +24,6 @@ app.use(express.static(path.resolve('client')));
     }) */
 
 app.get('/test', (req, res) => {
-  console.log('page load');
   res.send('Places to Visit (again)');
 });
 
