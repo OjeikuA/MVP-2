@@ -4,7 +4,7 @@ import axios from 'axios';
 import Map from './Map.jsx';
 
 const App = (props) => {
-  const [init, setInit] = useState('Hello World');
+  const [init, setInit] = useState('Deployed App');
   const [map, setMap] = useState(null);
   const [location, setLocation] = useState({
     address: 'Brooklyn, NY',
