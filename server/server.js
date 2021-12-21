@@ -50,7 +50,7 @@ app.get('/findSpot', (req, res) => {
 
 app.get('/showCity', (req, res) => {
   const name = req.query.name.split(' ').join('+');
-  axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + name + '&inputtype=textquery&key=' + functions.config().mvp.api + '&fields=formatted_address%2Cgeometry')
+  axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + name + '&inputtype=textquery&key=' + 'AIzaSyA2alD8pmzJrvKCYYu6NaI-hF_o5dPX1O0' + '&fields=formatted_address%2Cgeometry')
   .then(data => {
     console.log('geometry is', data.data.candidates[0].geometry)
     res.send(data.data.candidates[0].geometry.location)
@@ -61,7 +61,7 @@ app.get('/showCity', (req, res) => {
 app.get('/findplacefromtext', (req, res) => {
   console.log(req.query.name)
   const name = req.query.name.split(' ').join('%20')
-  axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + name + '&inputtype=textquery&key=' + functions.config().mvp.api + '&fields=formatted_address%2Cgeometry%2Crating%2Cprice_level%2Ctypes')
+  axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + name + '&inputtype=textquery&key=' + 'AIzaSyA2alD8pmzJrvKCYYu6NaI-hF_o5dPX1O0' + '&fields=formatted_address%2Cgeometry%2Crating%2Cprice_level%2Ctypes')
     .then(data => {
       console.log(data.data.candidates)
       // console.log(data.data.candidates[0].photos)
@@ -72,12 +72,12 @@ app.get('/findplacefromtext', (req, res) => {
 
 app.get('/photos', (req, res) => {
   console.log(req.query.name)
-  axios.get('https://www.googleapis.com/customsearch/v1?key=' + functions.config().mvp.search + '&cx=' + functions.config().mvp.ngn + '&q=' + req.query.name + '&searchType=IMAGE')
+  axios.get('https://www.googleapis.com/customsearch/v1?key=' + 'AIzaSyA2alD8pmzJrvKCYYu6NaI-hF_o5dPX1O0' + '&cx=' + '7b1e234da0b3cc8cd' + '&q=' + req.query.name + '&searchType=IMAGE')
     .then(data => res.send(data.data.items))
     .catch(err => console.error(err))
 })
 
-app.listen(functions.config().mvp.port, ()=>{
-  console.log(`Listening on port: ${functions.config().mvp.port}`);
+app.listen(3000, ()=>{
+  console.log(`Listening on port: ${3000}`);
 })
 
