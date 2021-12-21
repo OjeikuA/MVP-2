@@ -4,7 +4,7 @@ import axios from 'axios';
 import GoogleMapReact from 'google-map-react'
 import App from './App.jsx';
 import LocationPin from './LocationPin.jsx';
-import { API_KEY } from '../config.js';
+// import { API_KEY } from '../config.js';
 
 const Map = ({ location, zoomLevel, header = "Find a Locale of Interest" }) => (
   <div className="map">
@@ -12,7 +12,7 @@ const Map = ({ location, zoomLevel, header = "Find a Locale of Interest" }) => (
 
     <div className="google-map">
       <GoogleMapReact
-        bootstrapURLKeys={{ key: API_KEY }}
+        bootstrapURLKeys={{ key: functions.config().mvp.api }}
         center={location}
         zoom={zoomLevel}
       >
