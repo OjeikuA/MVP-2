@@ -1,0 +1,14 @@
+{
+  "steps": [
+   {
+      "name": "gcr.io/master-ember-317002/firebase",
+      "args": [
+         "deploy",
+         "--project",
+         "steel-signifier-329004",
+         "--only",
+         "hosting"
+       ]
+  }
+  ]
+}
