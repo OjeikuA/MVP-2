@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-  const conn = mongoose.createConnection('mongodb://52.71.22.114:27017/locales')
+  const conn = mongoose.createConnection(process.env.MONGODB_URI)
   .once('open', ()=> console.log(`Connected to Locales!`));
 
 const localeSchema = new mongoose.Schema({
