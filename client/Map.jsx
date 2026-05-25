@@ -12,7 +12,7 @@ const Map = ({ location, zoomLevel, header = "Find a Locale of Interest" }) => (
 
     <div className="google-map">
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyA2alD8pmzJrvKCYYu6NaI-hF_o5dPX1O0' }}
+        bootstrapURLKeys={{ key: process.env.GOOGLE_API_KEY }}
         center={location}
         zoom={zoomLevel}
       >
