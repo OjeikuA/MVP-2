@@ -15,7 +15,10 @@ module.exports = {
             exclude: /node_modules/,
             loader: 'babel-loader',
             options: {
-               presets: ["@babel/env", "@babel/react"]
+               presets: [
+                 ["@babel/env", { "targets": { "browsers": ["last 2 versions"] } }],
+                 "@babel/react"
+               ]
             }
          }
       ]
